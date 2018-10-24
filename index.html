@@ -7,31 +7,59 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
     <!-- Don't use in production -->
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
-    <style>
-        .red {
-            color: #FF0000;
-        }
-    </style>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
-        const News = () => (
-            <p>No news yet.</p>
-        );
+    const myNews = [
+        {
+            id: 1,
+            author: 'Roberto Corkery',
+            text: 'Aliquam odio modi.'
+        },
+        {
+            id: 2,
+            author: 'Bette Deckow',
+            text: 'Corporis nisi omnis odio doloremque numquam.'
+        },
+        {
+            id: 3,
+            author: 'Nedra Hamill',
+            text: 'Dolor illo velit quia eos quisquam reiciendis in consequatur quas.'
+        },
+        {
+            id: 4,
+            author: 'Guest',
+            text: 'Vel autem sequi quas qui deserunt alias est magnam.'
+        }
+    ];
 
-        const Commnets = () => (
+        const News = (props) => {
+            const newsTemplate = props.data.map((item, index) => (
+                <div key={item.id}>
+                    <p className="news__author">{item.author}</p>
+                    <p className="news__text">{item.text}</p>
+                </div>
+            ));
+
+            return (
+                <div className="news">
+                    {newsTemplate}
+                </div>
+            );
+        };
+
+        const Comments = () => (
             <p>No comments yet.</p>
         );
 
         const App = () => (
             <React.Fragment>
                 <h2>I'm the simple component App</h2>
-                <News />
-                <Commnets />
+                <News data={myNews} />
+                <Comments />
             </React.Fragment>
         );
 
