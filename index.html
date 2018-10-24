@@ -8,17 +8,41 @@
 
     <!-- Don't use in production -->
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+    <style>
+        .red {
+            color: #FF0000;
+        }
+    </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
         const App = () => (
-            <p>It's simple component</p>
+            <h2>I'm the simple component App</h2>
         );
 
+        const News = () => (
+            <p>No news yet.</p>
+        );
+
+        class BigApp extends React.Component {
+            render() {
+                return (
+                    <React.Fragment>
+                        <h1>I'm component, BigApp</h1>
+                        <p className="red">Components can be nested in each other.</p>
+
+                        <App />
+                        <News />
+                    </React.Fragment>
+                );
+            }
+        }
+
         ReactDOM.render(
-            <App />,
+            <BigApp />,
             document.getElementById('root')
         );
 
