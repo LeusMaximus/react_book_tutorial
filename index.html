@@ -19,30 +19,24 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const App = () => (
-            <h2>I'm the simple component App</h2>
-        );
-
         const News = () => (
             <p>No news yet.</p>
         );
 
-        class BigApp extends React.Component {
-            render() {
-                return (
-                    <React.Fragment>
-                        <h1>I'm component, BigApp</h1>
-                        <p className="red">Components can be nested in each other.</p>
+        const Commnets = () => (
+            <p>No comments yet.</p>
+        );
 
-                        <App />
-                        <News />
-                    </React.Fragment>
-                );
-            }
-        }
+        const App = () => (
+            <React.Fragment>
+                <h2>I'm the simple component App</h2>
+                <News />
+                <Commnets />
+            </React.Fragment>
+        );
 
         ReactDOM.render(
-            <BigApp />,
+            <App />,
             document.getElementById('root')
         );
 
