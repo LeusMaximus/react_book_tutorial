@@ -5,6 +5,7 @@
     <title>React Book</title>
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
 
     <!-- Don't use in production -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -70,7 +71,7 @@
         ];
 
         const Article = (props) => {
-            const { author, text } = props.article;
+            const { author, text } = props.data;
 
             return (
                 <div className="article">
@@ -80,11 +81,19 @@
             );
         };
 
+        Article.propTypes = {
+            data: PropTypes.shape({
+                id: PropTypes.number.isRequired,
+                author: PropTypes.string.isRequired,
+                text: PropTypes.string.isRequired
+            })
+        };
+
         const News = (props) => {
             const { data } = props;
 
             const newsItemsTpl = data.map(item => (
-                <Article key={item.id} article={item} />
+                <Article key={item.id} data={item} />
             ));
 
             const noNewsTpl = <p>No news yet.</p>;
@@ -96,6 +105,10 @@
                 </div>
             );
         };
+
+        News.propTypes = {
+            data: PropTypes.array.isRequired
+        }
 
         const App = () => (
             <React.Fragment>
