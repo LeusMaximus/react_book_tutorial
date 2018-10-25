@@ -51,41 +51,66 @@
             {
                 id: 1,
                 author: 'Roberto Corkery',
-                text: 'Aliquam odio modi.'
+                text: 'Aliquam odio modi.',
+                bigText: 'Ut dolor voluptas sit dicta dolor. Eligendi eligendi accusantium. Laboriosam quo ut iusto ipsum non sed ut est cupiditate. Nihil eos soluta soluta et totam quibusdam doloribus maxime. Aut expedita vel impedit recusandae quae sit.'
             },
             {
                 id: 2,
                 author: 'Bette Deckow',
-                text: 'Corporis nisi omnis odio doloremque numquam.'
+                text: 'Corporis nisi omnis odio doloremque numquam.',
+                bigText: 'Praesentium voluptatibus est. Qui voluptas necessitatibus doloremque illo facilis.'
             },
             {
                 id: 3,
                 author: 'Nedra Hamill',
-                text: 'Dolor illo velit quia eos quisquam reiciendis in consequatur quas.'
+                text: 'Dolor illo velit quia eos quisquam reiciendis in consequatur quas.',
+                bigText: 'Amet occaecati sunt quasi omnis non impedit temporibus ut dolorem. Ipsam expedita nostrum id odit voluptates libero. Excepturi velit sed possimus dignissimos voluptatibus.'
             },
             {
                 id: 4,
                 author: 'Guest',
-                text: 'Vel autem sequi quas qui deserunt alias est magnam.'
+                text: 'Vel autem sequi quas qui deserunt alias est magnam.',
+                bigText: 'Tempora optio natus animi impedit. Sunt alias vel. Modi aliquam dicta rerum dolore. Architecto non eum nisi. Veritatis asperiores nisi deserunt et animi et quaerat voluptas. Harum dolore nulla qui sequi quibusdam hic.'
             }
         ];
 
-        const Article = (props) => {
-            const { author, text } = props.data;
+        class Article extends React.Component {
+            state = {
+                bigTextVisible: false
+            }
 
-            return (
-                <div className="article">
-                    <p className="news__author">{author}:</p>
-                    <p className="news__text">{text}</p>
-                </div>
-            );
+            handleReadMoreClick = e => {
+                e.preventDefault();
+                this.setState({
+                    bigTextVisible: true,
+                });
+            }
+
+            render() {
+                const { author, text, bigText } = this.props.data;
+                const { bigTextVisible } = this.state;
+
+                return (
+                    <div className="article">
+                        <p className="news__author">{author}:</p>
+                        <p className="news__text">{text}</p>
+                        {
+                            !bigTextVisible && <a onClick={this.handleReadMoreClick} href="#" className="news__readmore">More</a>
+                        }
+                        {
+                            bigTextVisible && <p className="news__bit-text">{bigText}</p>
+                        }
+                    </div>
+                );
+            }
         };
 
         Article.propTypes = {
             data: PropTypes.shape({
                 id: PropTypes.number.isRequired,
                 author: PropTypes.string.isRequired,
-                text: PropTypes.string.isRequired
+                text: PropTypes.string.isRequired,
+                bigText: PropTypes.string.isRequired
             })
         };
 
@@ -107,6 +132,7 @@
         };
 
         News.propTypes = {
+
             data: PropTypes.array.isRequired
         }
 
